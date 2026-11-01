@@ -1,4 +1,4 @@
-# ModelCheck scanner
+# Swapvera scanner
 
 Finds OpenAI, Anthropic and Gemini model IDs in your code that are **already retired** or **scheduled for shutdown**, and tells you the replacement and the date.
 
@@ -7,8 +7,8 @@ Providers retire models every few months. Most apps hard-code the model ID, and 
 ## Use it as a GitHub Action
 
 ```yaml
-# .github/workflows/modelcheck.yml
-name: ModelCheck
+# .github/workflows/swapvera.yml
+name: Swapvera
 on:
   push:
     branches: [main]
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pixelric-spec/modelcheck-scanner@v1
+      - uses: pixelric-spec/swapvera-scanner@v1
         with:
           fail-on: retired     # retired | soon | never | days:30
 ```
@@ -32,7 +32,7 @@ What you get:
 - An annotation on every line that uses a deprecated model.
 - A summary table in the job page.
 - One issue, kept up to date, listing every model, its shutdown date and its replacement. It closes itself when the models are gone.
-- `modelcheck-scan.json` with the full report.
+- `swapvera-scan.json` with the full report.
 
 | Input | Default | Meaning |
 | --- | --- | --- |
@@ -47,8 +47,8 @@ Outputs: `found`, `retired`, `soonest-days`, `issue-number`, `report-file`.
 ## Use it locally
 
 ```bash
-npx modelcheck-scan .
-npx modelcheck-scan . --json --fail-on days:30
+npx swapvera-scan .
+npx swapvera-scan . --json --fail-on days:30
 ```
 
 ## How matching works
@@ -64,7 +64,7 @@ No code leaves your runner. The scanner has no dependencies and makes no network
 
 ## Is the replacement safe?
 
-Changing the model ID is one line. Knowing whether your answers got worse is not. [ModelCheck](https://modelcheck.example) runs your prompts on the old and the new model and posts a statistical verdict on the pull request: safe to migrate, review these cases, or do not migrate.
+Changing the model ID is one line. Knowing whether your answers got worse is not. [Swapvera](https://swapvera.example) runs your prompts on the old and the new model and posts a statistical verdict on the pull request: safe to migrate, review these cases, or do not migrate.
 
 ## Dates
 

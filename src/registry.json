@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updated": "2026-11-01",
-  "site_url": "https://modelcheck.example",
+  "site_url": "https://swapvera.example",
   "notes": "Shutdown dates on each provider's first-party API unless 'platform' says otherwise. Every entry cites the page it comes from. Re-check against official pages before each release (scripts/watch_sources.py).",
   "sources": {
     "kim": "https://arxiv.org/html/2609.31288v1",

@@ -15,7 +15,7 @@ const SKIP_DIRS = new Set([
 ]);
 const SKIP_FILES = new Set([
   'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'poetry.lock', 'Cargo.lock', 'uv.lock',
-  'modelcheck-scan.json', 'modelcheck-report.json',
+  'swapvera-scan.json', 'swapvera-report.json',
 ]);
 const MAX_FILE_BYTES = 1024 * 1024;
 const TOKEN_RE = /[A-Za-z0-9][A-Za-z0-9._-]*/g;
@@ -248,11 +248,11 @@ function migrationUrl(siteUrl, g, source) {
 function renderMarkdown(groups, opts) {
   const { siteUrl, repoUrl, sha, source = 'scanner', today } = opts;
   if (groups.length === 0) {
-    return `### ModelCheck: no deprecated AI models found\n\nScanned on ${today}. No model IDs in this repository have an announced retirement date.\n`;
+    return `### Swapvera: no deprecated AI models found\n\nScanned on ${today}. No model IDs in this repository have an announced retirement date.\n`;
   }
   const lines = [];
   const urgent = groups.filter((g) => g.severity !== 'notice').length;
-  lines.push(`### ModelCheck: ${urgent} of ${groups.length} model groups need attention`);
+  lines.push(`### Swapvera: ${urgent} of ${groups.length} model groups need attention`);
   lines.push('');
   lines.push(`Scanned on ${today}. Retirement dates come from provider announcements; each row links its source.`);
   lines.push('');
@@ -271,7 +271,7 @@ function renderMarkdown(groups, opts) {
   lines.push('');
   const migratable = groups.filter((g) => g.severity !== 'notice' && g.entry.replacement);
   if (migratable.length) {
-    lines.push('**Is the replacement safe for your app?** Swapping the model ID is a one-line change; knowing whether answers got worse is not. ModelCheck runs your prompts on both models and gives a statistical verdict.');
+    lines.push('**Is the replacement safe for your app?** Swapping the model ID is a one-line change; knowing whether answers got worse is not. Swapvera runs your prompts on both models and gives a statistical verdict.');
     lines.push('');
     for (const g of migratable.slice(0, 5)) {
       lines.push(`- [Check ${g.ids[0]} -> ${g.entry.replacement}](${migrationUrl(siteUrl, g, source)})`);

@@ -1,6 +1,6 @@
-name: 'ModelCheck: deprecated AI model scanner'
+name: 'Swapvera: deprecated AI model scanner'
 description: 'Finds OpenAI, Anthropic and Gemini model IDs in your code that are retired or scheduled for shutdown.'
-author: 'ModelCheck'
+author: 'Swapvera'
 branding:
   icon: 'alert-triangle'
   color: 'orange'
@@ -25,7 +25,7 @@ inputs:
     default: ''
   output-file:
     description: 'Where to write the JSON report.'
-    default: 'modelcheck-scan.json'
+    default: 'swapvera-scan.json'
   site-url:
     description: 'Base URL for migration links.'
     default: ''

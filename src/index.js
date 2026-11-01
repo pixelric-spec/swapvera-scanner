@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const { scanDir, groupFindings, shouldFail, renderMarkdown } = require('./scan');
 
-const MARKER = '<!-- modelcheck-scan -->';
+const MARKER = '<!-- swapvera-scan -->';
 
 function input(name, fallback = '') {
   const v = process.env[`INPUT_${name.replace(/ /g, '_').toUpperCase()}`];
@@ -35,7 +35,7 @@ async function gh(method, url, token, body) {
       Authorization: `Bearer ${token}`,
       Accept: 'application/vnd.github+json',
       'X-GitHub-Api-Version': '2022-11-28',
-      'User-Agent': 'modelcheck-scanner',
+      'User-Agent': 'swapvera-scanner',
     },
     body: body ? JSON.stringify(body) : undefined,
   });
@@ -44,7 +44,7 @@ async function gh(method, url, token, body) {
 }
 
 async function upsertIssue(token, repo, groups, body) {
-  const open = await gh('GET', `/repos/${repo}/issues?state=open&per_page=100&labels=modelcheck`, token).catch(() => []);
+  const open = await gh('GET', `/repos/${repo}/issues?state=open&per_page=100&labels=swapvera`, token).catch(() => []);
   const existing = (open || []).find((i) => (i.body || '').includes(MARKER));
   const urgent = groups.filter((g) => g.severity !== 'notice');
   if (urgent.length === 0) {
@@ -62,14 +62,14 @@ async function upsertIssue(token, repo, groups, body) {
     const soonest = Math.min(...upcoming.map((g) => Math.max(g.daysLeft, 0)));
     parts.push(`${upcoming.length} retiring, first in ${soonest} days`);
   }
-  const title = `ModelCheck: ${parts.join('; ')}`;
+  const title = `Swapvera: ${parts.join('; ')}`;
   const full = `${MARKER}\n${body}`;
   if (existing) {
     await gh('PATCH', `/repos/${repo}/issues/${existing.number}`, token, { title, body: full });
     return existing.number;
   }
   try {
-    const created = await gh('POST', `/repos/${repo}/issues`, token, { title, body: full, labels: ['modelcheck'] });
+    const created = await gh('POST', `/repos/${repo}/issues`, token, { title, body: full, labels: ['swapvera'] });
     return created.number;
   } catch (e) {
     const created = await gh('POST', `/repos/${repo}/issues`, token, { title, body: full });
@@ -85,7 +85,7 @@ async function main() {
   const warnDays = Number(input('warn-days', '90'));
   const failOn = input('fail-on', 'retired');
   const siteUrl = input('site-url', registry.site_url).replace(/\/$/, '');
-  const outFile = input('output-file', 'modelcheck-scan.json');
+  const outFile = input('output-file', 'swapvera-scan.json');
   const ignore = input('ignore', '').split(/[\n,]/).map((s) => s.trim()).filter(Boolean);
   // Nunca escanear nuestro propio informe de la ejecucion anterior.
   ignore.push(path.relative(root, path.resolve(workspace, outFile)).split(path.sep).join('/'));
@@ -137,7 +137,7 @@ async function main() {
   }
 
   if (shouldFail(failOn, groups)) {
-    process.stdout.write(`::error::ModelCheck failed (fail-on: ${failOn}).\n`);
+    process.stdout.write(`::error::Swapvera failed (fail-on: ${failOn}).\n`);
     process.exitCode = 1;
   }
 }

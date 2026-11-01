@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-// Uso: npx modelcheck-scan [ruta] [--fail-on retired|soon|never|days:N] [--json] [--today AAAA-MM-DD]
+// Uso: npx swapvera-scan [ruta] [--fail-on retired|soon|never|days:N] [--json] [--today AAAA-MM-DD]
 const fs = require('fs');
 const path = require('path');
 const { scanDir, groupFindings, shouldFail, statusLabel } = require('./scan');
