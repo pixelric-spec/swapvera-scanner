@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updated": "2026-11-01",
-  "site_url": "https://swapvera.example",
+  "site_url": "https://swapvera.vercel.app",
   "notes": "Shutdown dates on each provider's first-party API unless 'platform' says otherwise. Every entry cites the page it comes from. Re-check against official pages before each release (scripts/watch_sources.py).",
   "sources": {
     "kim": "https://arxiv.org/html/2609.31288v1",
@@ -11,7 +11,10 @@
     "quora": "https://github.com/quora/model-deprecation-tracker",
     "iadecider": "https://iadecider.com/articles/llm-deprecation-sunset-tracker-2026",
     "beri": "https://www.beri.net/article/model-deprecation-policy-notice-windows-bedrock-azure-anthropic-openai-gemini",
-    "ortamarco": "https://ortamarco.me/en/blog/ai-model-retirements-2026/"
+    "ortamarco": "https://ortamarco.me/en/blog/ai-model-retirements-2026/",
+    "anthropic": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+    "openai": "https://developers.openai.com/api/docs/deprecations",
+    "gemini": "https://ai.google.dev/gemini-api/docs/deprecations"
   },
   "entries": [
     {
@@ -27,7 +30,7 @@
       "shutdown_kind": "exact",
       "replacement": "claude-sonnet-5-5",
       "replacement_name": "Claude Sonnet 5.5",
-      "source": "blocksize",
+      "source": "anthropic",
       "note": "Same date on Claude Platform on AWS and Microsoft Foundry. On Amazon Bedrock it runs until 2027-04-08."
     },
     {
@@ -59,7 +62,7 @@
       "shutdown_kind": "not_before",
       "replacement": null,
       "replacement_name": null,
-      "source": "blocksize",
+      "source": "anthropic",
       "note": "Tentative: not before 2026-11-24. Anthropic gives at least 60 days of notice.",
       "seo_page": false
     },
@@ -223,38 +226,16 @@
       "name": "gpt-image-1-mini and gpt-image-1.5",
       "ids": [
         "gpt-image-1-mini",
-        "gpt-image-1.5"
+        "gpt-image-1.5",
+        "chatgpt-image-latest"
       ],
       "platform": "openai-api",
       "deprecated": null,
       "shutdown": "2026-12-01",
       "shutdown_kind": "exact",
-      "replacement": "gpt-image-2.5",
-      "replacement_name": "gpt-image-2.5",
-      "source": "blocksize"
-    },
-    {
-      "slug": "gpt-5-and-o3-to-gpt-5-6",
-      "provider": "openai",
-      "name": "GPT-5, GPT-5 mini, GPT-5 nano, GPT-5 pro, o3 and o3-pro",
-      "ids": [
-        "gpt-5",
-        "gpt-5-mini",
-        "gpt-5-nano",
-        "gpt-5-pro",
-        "o3",
-        "o3-pro"
-      ],
-      "ambiguous_ids": [
-        "o3"
-      ],
-      "platform": "openai-api",
-      "deprecated": null,
-      "shutdown": "2026-12-11",
-      "shutdown_kind": "exact",
-      "replacement": "gpt-5.6-terra",
-      "replacement_name": "GPT-5.6 family",
-      "source": "blocksize"
+      "replacement": "gpt-image-2.5-sunburst",
+      "replacement_name": "gpt-image-2.5 (sunburst or flare)",
+      "source": "openai"
     },
     {
       "slug": "gpt-4o-and-gpt-4-1-to-gpt-6-luna",
@@ -264,8 +245,7 @@
         "gpt-4o",
         "gpt-4o-mini",
         "gpt-4.1",
-        "gpt-4.1-mini",
-        "chatgpt-4o-latest"
+        "gpt-4.1-mini"
       ],
       "platform": "openai-api",
       "deprecated": null,
@@ -273,27 +253,8 @@
       "shutdown_kind": "exact",
       "replacement": "gpt-6-luna",
       "replacement_name": "GPT-6 Luna",
-      "source": "blocksize",
+      "source": "openai",
       "note": "Includes fine-tuned models of these families."
-    },
-    {
-      "slug": "gpt-realtime-and-gpt-audio-to-gpt-realtime-2-1",
-      "provider": "openai",
-      "name": "gpt-realtime, gpt-audio and older realtime models",
-      "ids": [
-        "gpt-realtime",
-        "gpt-audio",
-        "gpt-4o-realtime",
-        "gpt-4o-audio-preview",
-        "gpt-4o-mini-realtime-preview"
-      ],
-      "platform": "openai-api",
-      "deprecated": null,
-      "shutdown": "2027-01-20",
-      "shutdown_kind": "exact",
-      "replacement": "gpt-realtime-2.1",
-      "replacement_name": "gpt-realtime-2.1",
-      "source": "blocksize"
     },
     {
       "slug": "gpt-4o-realtime-preview-retired",
@@ -317,61 +278,34 @@
       "name": "whisper-1 and gpt-4o-transcribe",
       "ids": [
         "whisper-1",
-        "gpt-4o-transcribe"
+        "gpt-4o-transcribe",
+        "gpt-4o-mini-transcribe",
+        "gpt-4o-transcribe-diarize"
       ],
       "platform": "openai-api",
       "deprecated": null,
       "shutdown": "2027-02-26",
       "shutdown_kind": "exact",
       "replacement": "gpt-transcribe",
-      "replacement_name": "gpt-transcribe",
-      "source": "blocksize"
-    },
-    {
-      "slug": "gpt-5-1-and-gpt-5-4-nano-to-gpt-6",
-      "provider": "openai",
-      "name": "GPT-5.1 and GPT-5.4 nano",
-      "ids": [
-        "gpt-5.1",
-        "gpt-5.4-nano"
-      ],
-      "platform": "openai-api",
-      "deprecated": "2026-10-01",
-      "shutdown": "2027-04-01",
-      "shutdown_kind": "exact",
-      "replacement": "gpt-6-sol",
-      "replacement_name": "GPT-6 Sol or GPT-6 Luna",
-      "source": "yardwork"
-    },
-    {
-      "slug": "gemini-3-6-flash-to-gemini-3-8-flash",
-      "provider": "google",
-      "name": "Gemini 3.6 Flash",
-      "ids": [
-        "gemini-3.6-flash"
-      ],
-      "platform": "gemini-api",
-      "deprecated": null,
-      "shutdown": "2026-11-19",
-      "shutdown_kind": "exact",
-      "replacement": "gemini-3.8-flash",
-      "replacement_name": "Gemini 3.8 Flash",
-      "source": "iadecider"
+      "replacement_name": "gpt-transcribe or gpt-live-transcribe",
+      "source": "openai"
     },
     {
       "slug": "gemini-tts-and-live-previews-to-gemini-3-8",
       "provider": "google",
-      "name": "Gemini 3.1 Flash TTS (preview)",
+      "name": "Gemini TTS previews",
       "ids": [
-        "gemini-3.1-flash-tts-preview"
+        "gemini-3.1-flash-tts-preview",
+        "gemini-2.5-flash-preview-tts",
+        "gemini-2.5-pro-preview-tts"
       ],
       "platform": "gemini-api",
       "deprecated": null,
       "shutdown": "2026-11-17",
-      "shutdown_kind": "exact",
+      "shutdown_kind": "not_before",
       "replacement": "gemini-3.8-flash-tts",
-      "replacement_name": "Gemini 3.8 Flash TTS",
-      "source": "quora"
+      "replacement_name": "Gemini 3.8 Flash TTS or Flash-Lite TTS",
+      "source": "gemini"
     },
     {
       "slug": "gemini-2-5-vertex-to-gemini-3-8-flash",
@@ -418,10 +352,10 @@
       "platform": "gemini-api",
       "deprecated": null,
       "shutdown": "2027-05-07",
-      "shutdown_kind": "exact",
+      "shutdown_kind": "not_before",
       "replacement": "gemini-3.5-flash-lite",
       "replacement_name": "Gemini 3.5 Flash-Lite",
-      "source": "yardwork"
+      "source": "gemini"
     },
     {
       "slug": "gemini-3-pro-preview-retired",
@@ -454,6 +388,186 @@
       "replacement_name": "Gemini 3.8 Flash",
       "source": "quora",
       "seo_page": false
+    },
+    {
+      "slug": "gpt-5-and-o3-to-gpt-5-6-sol",
+      "provider": "openai",
+      "name": "GPT-5, GPT-5 Pro and o3",
+      "ids": [
+        "gpt-5",
+        "gpt-5-pro",
+        "o3",
+        "o3-pro"
+      ],
+      "platform": "openai-api",
+      "deprecated": null,
+      "shutdown": "2026-12-11",
+      "shutdown_kind": "exact",
+      "replacement": "gpt-5.6-sol",
+      "replacement_name": "GPT-5.6 Sol",
+      "source": "openai",
+      "ambiguous_ids": [
+        "o3"
+      ]
+    },
+    {
+      "slug": "gpt-5-mini-to-gpt-5-6-terra",
+      "provider": "openai",
+      "name": "GPT-5 mini",
+      "ids": [
+        "gpt-5-mini"
+      ],
+      "platform": "openai-api",
+      "deprecated": null,
+      "shutdown": "2026-12-11",
+      "shutdown_kind": "exact",
+      "replacement": "gpt-5.6-terra",
+      "replacement_name": "GPT-5.6 Terra",
+      "source": "openai"
+    },
+    {
+      "slug": "gpt-5-nano-to-gpt-5-6-luna",
+      "provider": "openai",
+      "name": "GPT-5 nano",
+      "ids": [
+        "gpt-5-nano"
+      ],
+      "platform": "openai-api",
+      "deprecated": null,
+      "shutdown": "2026-12-11",
+      "shutdown_kind": "exact",
+      "replacement": "gpt-5.6-luna",
+      "replacement_name": "GPT-5.6 Luna",
+      "source": "openai"
+    },
+    {
+      "slug": "tts-1-and-gpt-4o-mini-tts-to-gpt-realtime-2-1-mini",
+      "provider": "openai",
+      "name": "tts-1 and gpt-4o-mini-tts",
+      "ids": [
+        "tts-1",
+        "tts-1-hd",
+        "gpt-4o-mini-tts"
+      ],
+      "platform": "openai-api",
+      "deprecated": null,
+      "shutdown": "2027-01-06",
+      "shutdown_kind": "exact",
+      "replacement": "gpt-realtime-2.1-mini",
+      "replacement_name": "gpt-realtime-2.1-mini",
+      "source": "openai"
+    },
+    {
+      "slug": "gpt-realtime-to-gpt-realtime-2-1",
+      "provider": "openai",
+      "name": "gpt-realtime and gpt-4o-realtime",
+      "ids": [
+        "gpt-realtime",
+        "gpt-4o-realtime"
+      ],
+      "platform": "openai-api",
+      "deprecated": null,
+      "shutdown": "2027-01-20",
+      "shutdown_kind": "exact",
+      "replacement": "gpt-realtime-2.1",
+      "replacement_name": "gpt-realtime-2.1",
+      "source": "openai"
+    },
+    {
+      "slug": "gpt-realtime-mini-to-gpt-realtime-2-1-mini",
+      "provider": "openai",
+      "name": "gpt-realtime-mini and gpt-4o-mini-realtime",
+      "ids": [
+        "gpt-realtime-mini",
+        "gpt-4o-mini-realtime"
+      ],
+      "platform": "openai-api",
+      "deprecated": null,
+      "shutdown": "2027-01-20",
+      "shutdown_kind": "exact",
+      "replacement": "gpt-realtime-2.1-mini",
+      "replacement_name": "gpt-realtime-2.1-mini",
+      "source": "openai"
+    },
+    {
+      "slug": "gpt-audio-to-gpt-audio-1-5",
+      "provider": "openai",
+      "name": "gpt-audio models",
+      "ids": [
+        "gpt-audio",
+        "gpt-audio-mini",
+        "gpt-4o-audio",
+        "gpt-4o-mini-audio"
+      ],
+      "platform": "openai-api",
+      "deprecated": null,
+      "shutdown": "2027-01-20",
+      "shutdown_kind": "exact",
+      "replacement": "gpt-audio-1.5",
+      "replacement_name": "gpt-audio-1.5",
+      "source": "openai"
+    },
+    {
+      "slug": "gpt-5-1-to-gpt-6-sol",
+      "provider": "openai",
+      "name": "GPT-5.1 and gpt-5.3-codex",
+      "ids": [
+        "gpt-5.1",
+        "gpt-5.3-codex"
+      ],
+      "platform": "openai-api",
+      "deprecated": null,
+      "shutdown": "2027-04-01",
+      "shutdown_kind": "exact",
+      "replacement": "gpt-6-sol",
+      "replacement_name": "GPT-6 Sol",
+      "source": "openai"
+    },
+    {
+      "slug": "gpt-5-4-nano-to-gpt-6-luna",
+      "provider": "openai",
+      "name": "GPT-5.4 nano",
+      "ids": [
+        "gpt-5.4-nano"
+      ],
+      "platform": "openai-api",
+      "deprecated": null,
+      "shutdown": "2027-04-01",
+      "shutdown_kind": "exact",
+      "replacement": "gpt-6-luna",
+      "replacement_name": "GPT-6 Luna",
+      "source": "openai"
+    },
+    {
+      "slug": "gemini-live-previews-to-gemini-3-8-live",
+      "provider": "google",
+      "name": "Gemini Live previews",
+      "ids": [
+        "gemini-3.1-flash-live-preview",
+        "gemini-2.5-flash-native-audio-preview-12-2025"
+      ],
+      "platform": "gemini-api",
+      "deprecated": null,
+      "shutdown": "2026-11-17",
+      "shutdown_kind": "not_before",
+      "replacement": "gemini-3.8-live",
+      "replacement_name": "Gemini 3.8 Live",
+      "source": "gemini"
+    },
+    {
+      "slug": "gemini-2-5-flash-image-to-gemini-3-1-flash-lite-image",
+      "provider": "google",
+      "name": "Gemini 2.5 Flash Image",
+      "ids": [
+        "gemini-2.5-flash-image"
+      ],
+      "platform": "gemini-api",
+      "deprecated": null,
+      "shutdown": "2027-03-15",
+      "shutdown_kind": "not_before",
+      "replacement": "gemini-3.1-flash-lite-image",
+      "replacement_name": "Gemini 3.1 Flash-Lite Image",
+      "source": "gemini"
     }
   ],
   "endpoints": [

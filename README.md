@@ -64,7 +64,7 @@ No code leaves your runner. The scanner has no dependencies and makes no network
 
 ## Is the replacement safe?
 
-Changing the model ID is one line. Knowing whether your answers got worse is not. [Swapvera](https://swapvera.example) runs your prompts on the old and the new model and posts a statistical verdict on the pull request: safe to migrate, review these cases, or do not migrate.
+Changing the model ID is one line. Knowing whether your answers got worse is not. [Swapvera](https://swapvera.vercel.app) runs your prompts on the old and the new model and posts a statistical verdict on the pull request: safe to migrate, review these cases, or do not migrate.
 
 ## Dates
 

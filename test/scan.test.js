@@ -74,8 +74,8 @@ test('scanDir walks files, skips node_modules and lockfiles', () => {
   const { files, findings } = scan.scanDir(dir, registry);
   assert.strictEqual(files, 2);
   const groups = scan.groupFindings(findings, registry, TODAY, 90);
-  assert.deepStrictEqual(groups.map((g) => g.slug).sort(), ['gpt-4o-and-gpt-4-1-to-gpt-6-luna', 'gpt-5-and-o3-to-gpt-5-6']);
-  const g5 = groups.find((g) => g.slug === 'gpt-5-and-o3-to-gpt-5-6');
+  assert.deepStrictEqual(groups.map((g) => g.slug).sort(), ['gpt-4o-and-gpt-4-1-to-gpt-6-luna', 'gpt-5-mini-to-gpt-5-6-terra']);
+  const g5 = groups.find((g) => g.slug === 'gpt-5-mini-to-gpt-5-6-terra');
   assert.strictEqual(g5.daysLeft, 40);
 });
 
