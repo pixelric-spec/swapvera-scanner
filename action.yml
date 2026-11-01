@@ -1,0 +1,45 @@
+name: 'ModelCheck: deprecated AI model scanner'
+description: 'Finds OpenAI, Anthropic and Gemini model IDs in your code that are retired or scheduled for shutdown.'
+author: 'ModelCheck'
+branding:
+  icon: 'alert-triangle'
+  color: 'orange'
+inputs:
+  path:
+    description: 'Directory to scan, relative to the workspace.'
+    default: '.'
+  fail-on:
+    description: 'When to fail the job: retired (default), soon, never, or days:N.'
+    default: 'retired'
+  warn-days:
+    description: 'Shutdowns within this many days are warnings.'
+    default: '90'
+  create-issue:
+    description: 'Open (or update) one issue listing the models that need attention. Needs issues: write.'
+    default: 'true'
+  github-token:
+    description: 'Token used to open the issue.'
+    default: ${{ github.token }}
+  ignore:
+    description: 'Comma or newline separated paths to skip.'
+    default: ''
+  output-file:
+    description: 'Where to write the JSON report.'
+    default: 'modelcheck-scan.json'
+  site-url:
+    description: 'Base URL for migration links.'
+    default: ''
+outputs:
+  found:
+    description: 'Number of model groups found.'
+  retired:
+    description: 'Number of groups already retired.'
+  soonest-days:
+    description: 'Days until the nearest shutdown that needs attention.'
+  issue-number:
+    description: 'Issue opened or updated.'
+  report-file:
+    description: 'Path of the JSON report.'
+runs:
+  using: 'node20'
+  main: 'src/index.js'

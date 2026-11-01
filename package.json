@@ -1,0 +1,11 @@
+{
+  "name": "modelcheck-scan",
+  "version": "0.1.0",
+  "description": "Find retired or soon-to-be-retired OpenAI, Anthropic and Gemini model IDs in your code.",
+  "license": "MIT",
+  "bin": { "modelcheck-scan": "src/cli.js" },
+  "main": "src/scan.js",
+  "files": ["src", "action.yml", "README.md"],
+  "engines": { "node": ">=20" },
+  "scripts": { "test": "node --test test/*.test.js" }
+}
