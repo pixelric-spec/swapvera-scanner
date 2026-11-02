@@ -25,8 +25,9 @@ if (process.argv.includes('--json')) {
   if (!groups.length) process.stdout.write('No deprecated AI models found.\n');
   for (const g of groups) {
     const mark = g.severity === 'error' ? 'X' : g.severity === 'warning' ? '!' : '-';
-    process.stdout.write(`\n[${mark}] ${g.entry.name}: ${statusLabel(g).replace(/\*/g, '')} (shutdown ${g.entry.shutdown})\n`);
-    process.stdout.write(`    replacement: ${g.entry.replacement_name || 'see provider'}\n`);
+    const tentative = g.entry.shutdown_kind === 'not_before';
+    process.stdout.write(`\n[${mark}] ${g.entry.name}: ${statusLabel(g).replace(/\*/g, '')}${tentative ? '' : ` (shutdown ${g.entry.shutdown})`}\n`);
+    process.stdout.write(`    ${tentative ? 'newer model' : 'replacement'}: ${g.entry.replacement_name || 'see provider'}\n`);
     for (const l of g.locations.slice(0, 5)) process.stdout.write(`    ${l.file}:${l.line}  ${l.token}\n`);
     if (g.locations.length > 5) process.stdout.write(`    ... ${g.locations.length - 5} more\n`);
   }

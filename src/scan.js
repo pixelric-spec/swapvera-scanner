@@ -176,8 +176,9 @@ function evaluate(entry, today, warnDays, uncertain) {
   let status;
   let severity;
   if (entry.shutdown_kind === 'not_before') {
+    // Sin retirada anunciada: el proveedor solo promete no retirarlo antes de esa fecha, y avisa antes
     status = days < 0 ? 'may_retire_anytime' : 'tentative';
-    severity = days < 0 ? 'warning' : 'notice';
+    severity = 'notice';
   } else if (days < 0) {
     status = 'retired';
     severity = 'error';
@@ -234,8 +235,8 @@ function statusLabel(g) {
     case 'retired': return `**Retired** ${-g.daysLeft} days ago, requests fail`;
     case 'retiring_soon': return `**${g.daysLeft} days left**`;
     case 'scheduled': return `${g.daysLeft} days left`;
-    case 'tentative': return `Not before ${g.entry.shutdown}`;
-    case 'may_retire_anytime': return 'Can be retired at any time with notice';
+    case 'tentative': return `No shutdown announced; not before ${g.entry.shutdown}`;
+    case 'may_retire_anytime': return 'No shutdown announced; the provider may announce one';
     default: return g.status;
   }
 }
@@ -265,7 +266,7 @@ function renderMarkdown(groups, opts) {
     });
     if (g.locations.length > 3) loc.push(`+${g.locations.length - 3} more`);
     const repl = g.entry.replacement_name || '-';
-    const date = `${g.entry.shutdown}${g.entry.platform && g.entry.platform !== 'anthropic-api' && g.entry.platform !== 'openai-api' && g.entry.platform !== 'gemini-api' ? ` (${g.entry.platform})` : ''}`;
+    const date = `${g.entry.shutdown_kind === 'not_before' ? 'not before ' : ''}${g.entry.shutdown}${g.entry.platform && g.entry.platform !== 'anthropic-api' && g.entry.platform !== 'openai-api' && g.entry.platform !== 'gemini-api' ? ` (${g.entry.platform})` : ''}`;
     lines.push(`| ${g.entry.name}<br>\`${g.ids.join('`, `')}\` | ${statusLabel(g)}${g.uncertain ? ' (date applies to another platform)' : ''} | ${date} | ${repl} | ${loc.join('<br>')} |`);
   }
   lines.push('');

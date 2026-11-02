@@ -60,6 +60,9 @@ test('evaluate statuses', () => {
   assert.strictEqual(scan.evaluate(e('2026-11-30'), TODAY, 90, false).severity, 'warning');
   assert.strictEqual(scan.evaluate(e('2027-04-01'), TODAY, 90, false).severity, 'notice');
   assert.strictEqual(scan.evaluate(e('2026-10-15', 'not_before'), TODAY, 90, false).status, 'may_retire_anytime');
+  // Sin retirada anunciada no es un aviso: no abre issue ni hace fallar el CI
+  assert.strictEqual(scan.evaluate(e('2026-10-15', 'not_before'), TODAY, 90, false).severity, 'notice');
+  assert.strictEqual(scan.shouldFail('soon', [{ ...scan.evaluate(e('2026-10-15', 'not_before'), TODAY, 90, false), entry: e('2026-10-15', 'not_before') }]), false);
   assert.strictEqual(scan.evaluate(e('2026-10-23'), TODAY, 90, true).severity, 'notice');
 });
 

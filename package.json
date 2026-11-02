@@ -1,6 +1,6 @@
 {
   "name": "swapvera-scan",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Find retired or soon-to-be-retired OpenAI, Anthropic and Gemini model IDs in your code.",
   "license": "MIT",
   "bin": { "swapvera-scan": "src/cli.js" },

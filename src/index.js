@@ -97,8 +97,11 @@ async function main() {
     const level = g.severity === 'error' ? 'error' : g.severity === 'warning' ? 'warning' : 'notice';
     const msg = g.status === 'retired'
       ? `${g.entry.name} was retired on ${g.entry.shutdown}; requests to it fail. Replacement: ${g.entry.replacement_name || 'see provider'}.`
-      : `${g.entry.name} shuts down on ${g.entry.shutdown}${g.entry.shutdown_kind === 'not_before' ? ' (not before)' : ''}. Replacement: ${g.entry.replacement_name || 'see provider'}.`;
-    for (const loc of g.locations.slice(0, 10)) annotate(level, loc, `Deprecated AI model: ${g.ids[0]}`, msg);
+      : g.entry.shutdown_kind === 'not_before'
+        ? `No shutdown announced for ${g.entry.name}; the provider will not retire it before ${g.entry.shutdown}. Newer model: ${g.entry.replacement_name || 'see provider'}.`
+        : `${g.entry.name} shuts down on ${g.entry.shutdown}. Replacement: ${g.entry.replacement_name || 'see provider'}.`;
+    const title = g.entry.shutdown_kind === 'not_before' ? `AI model with no shutdown date yet: ${g.ids[0]}` : `Deprecated AI model: ${g.ids[0]}`;
+    for (const loc of g.locations.slice(0, 10)) annotate(level, loc, title, msg);
   }
 
   const repo = process.env.GITHUB_REPOSITORY;

@@ -1,20 +1,14 @@
 {
   "version": 1,
-  "updated": "2026-11-01",
+  "updated": "2026-11-02",
   "site_url": "https://swapvera.com",
-  "notes": "Shutdown dates on each provider's first-party API unless 'platform' says otherwise. Every entry cites the page it comes from. Re-check against official pages before each release (scripts/watch_sources.py).",
+  "notes": "Shutdown dates on each provider's first-party API unless 'platform' says otherwise. Every entry cites the page it comes from. Every source is the provider's own page. Re-check them before each release.",
   "sources": {
-    "kim": "https://arxiv.org/html/2609.31288v1",
-    "blocksize": "https://ai.blocksize.hr/blog/en/llm-model-deprecation-lifecycle-management-2026.html",
-    "devdigest": "https://www.developersdigest.tech/blog/ai-model-shutdowns-2026-2027",
-    "yardwork": "https://yardwork.dev/en/blog/ai-model-retirements",
-    "quora": "https://github.com/quora/model-deprecation-tracker",
-    "iadecider": "https://iadecider.com/articles/llm-deprecation-sunset-tracker-2026",
-    "beri": "https://www.beri.net/article/model-deprecation-policy-notice-windows-bedrock-azure-anthropic-openai-gemini",
-    "ortamarco": "https://ortamarco.me/en/blog/ai-model-retirements-2026/",
     "anthropic": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
     "openai": "https://developers.openai.com/api/docs/deprecations",
-    "gemini": "https://ai.google.dev/gemini-api/docs/deprecations"
+    "gemini": "https://ai.google.dev/gemini-api/docs/deprecations",
+    "vertex": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
+    "bedrock": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle-legacy.html"
   },
   "entries": [
     {
@@ -46,8 +40,9 @@
       "shutdown_kind": "exact",
       "replacement": "claude-sonnet-5-5",
       "replacement_name": "Claude Sonnet 5.5",
-      "source": "devdigest",
-      "seo_page": false
+      "source": "bedrock",
+      "seo_page": false,
+      "note": "End of life applies to the regions Bedrock lists; other regions may differ."
     },
     {
       "slug": "claude-opus-4-5-not-before",
@@ -79,7 +74,7 @@
       "shutdown_kind": "not_before",
       "replacement": "claude-haiku-5-5",
       "replacement_name": "Claude Haiku 5.5",
-      "source": "blocksize",
+      "source": "anthropic",
       "note": "Tentative: not before 2026-10-15. No retirement notice published as of 2026-11-01.",
       "seo_page": false
     },
@@ -96,7 +91,7 @@
       "shutdown_kind": "exact",
       "replacement": "claude-opus-4-8",
       "replacement_name": "Claude Opus 4.8",
-      "source": "quora",
+      "source": "anthropic",
       "note": "On Amazon Bedrock it runs until 2027-01-08."
     },
     {
@@ -112,8 +107,9 @@
       "shutdown_kind": "exact",
       "replacement": "claude-opus-4-8",
       "replacement_name": "Claude Opus 4.8",
-      "source": "beri",
-      "seo_page": false
+      "source": "bedrock",
+      "seo_page": false,
+      "note": "End of life applies to the regions Bedrock lists; other regions may differ."
     },
     {
       "slug": "claude-sonnet-4-and-opus-4-retired",
@@ -131,7 +127,7 @@
       "shutdown_kind": "exact",
       "replacement": "claude-sonnet-5-5",
       "replacement_name": "Claude Sonnet 5.5",
-      "source": "kim",
+      "source": "anthropic",
       "note": "On Amazon Bedrock, Claude Sonnet 4 ran until 2026-10-14."
     },
     {
@@ -153,7 +149,7 @@
       "shutdown_kind": "exact",
       "replacement": "claude-haiku-5-5",
       "replacement_name": "Claude Haiku 5.5",
-      "source": "kim",
+      "source": "anthropic",
       "note": "Opus 3 shut down on 2026-01-05, Sonnet 3.7 and Haiku 3.5 on 2026-02-19, Haiku 3 on 2026-04-20. All requests fail."
     },
     {
@@ -172,7 +168,8 @@
         "o1-pro",
         "o3-mini",
         "o4-mini",
-        "gpt-4.1-nano"
+        "gpt-4.1-nano",
+        "gpt-4-1106-preview"
       ],
       "ambiguous_ids": [
         "o1"
@@ -183,7 +180,7 @@
       "shutdown_kind": "exact",
       "replacement": "gpt-5.6-terra",
       "replacement_name": "GPT-5.6 (Sol, Terra or Luna)",
-      "source": "devdigest",
+      "source": "openai",
       "note": "Single-day mass shutdown. Fine-tuned models of these families were shut down too."
     },
     {
@@ -192,7 +189,6 @@
       "name": "GPT-4 Turbo Preview",
       "ids": [
         "gpt-4-turbo-preview",
-        "gpt-4-1106-preview",
         "gpt-4-0125-preview"
       ],
       "platform": "openai-api",
@@ -201,7 +197,7 @@
       "shutdown_kind": "exact",
       "replacement": "gpt-5.6-terra",
       "replacement_name": "GPT-5.6 Terra",
-      "source": "kim",
+      "source": "openai",
       "seo_page": false
     },
     {
@@ -217,7 +213,7 @@
       "shutdown_kind": "exact",
       "replacement": "gpt-image-2.5-sunburst",
       "replacement_name": "gpt-image-2.5 (sunburst or flare)",
-      "source": "devdigest",
+      "source": "openai",
       "seo_page": false
     },
     {
@@ -269,7 +265,7 @@
       "shutdown_kind": "exact",
       "replacement": "gpt-realtime-2.1",
       "replacement_name": "gpt-realtime-2.1",
-      "source": "kim",
+      "source": "openai",
       "seo_page": false
     },
     {
@@ -319,11 +315,11 @@
       "platform": "vertex-ai",
       "deprecated": null,
       "shutdown": "2026-10-20",
-      "shutdown_kind": "exact",
+      "shutdown_kind": "not_before",
       "replacement": "gemini-3.8-flash",
       "replacement_name": "Gemini 3.8 Flash",
-      "source": "devdigest",
-      "note": "Vertex AI only. No date announced on the Gemini API as of 2026-11-01."
+      "source": "vertex",
+      "note": "Vertex AI lists 2026-10-20 as the retirement date and says it may be extended but not moved earlier; as of 2026-10-30 the models were still available."
     },
     {
       "slug": "gemini-2-0-flash-retired",
@@ -339,7 +335,7 @@
       "shutdown_kind": "exact",
       "replacement": "gemini-3.8-flash",
       "replacement_name": "Gemini 3.8 Flash",
-      "source": "kim",
+      "source": "gemini",
       "note": "Shut down on both the Gemini API and Vertex AI. Its announced successor, gemini-3.6-flash, also shuts down on 2026-11-19."
     },
     {
@@ -370,7 +366,7 @@
       "shutdown_kind": "exact",
       "replacement": null,
       "replacement_name": null,
-      "source": "kim",
+      "source": "gemini",
       "seo_page": false
     },
     {
@@ -386,7 +382,7 @@
       "shutdown_kind": "exact",
       "replacement": "gemini-3.8-flash",
       "replacement_name": "Gemini 3.8 Flash",
-      "source": "quora",
+      "source": "gemini",
       "seo_page": false
     },
     {
@@ -584,7 +580,7 @@
       "shutdown": "2026-08-26",
       "shutdown_kind": "exact",
       "replacement_name": "Responses API / Agents SDK",
-      "source": "kim",
+      "source": "openai",
       "seo_page": false
     },
     {
@@ -598,7 +594,7 @@
       "shutdown": "2026-11-30",
       "shutdown_kind": "exact",
       "replacement_name": "Prompts stored in your own code",
-      "source": "blocksize",
+      "source": "openai",
       "seo_page": false
     }
   ]
