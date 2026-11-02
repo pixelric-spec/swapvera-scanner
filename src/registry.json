@@ -333,10 +333,10 @@
       "deprecated": null,
       "shutdown": "2026-06-01",
       "shutdown_kind": "exact",
-      "replacement": "gemini-3.8-flash",
-      "replacement_name": "Gemini 3.8 Flash",
+      "replacement": "gemini-3.6-flash",
+      "replacement_name": "Gemini 3.6 Flash",
       "source": "gemini",
-      "note": "Shut down on both the Gemini API and Vertex AI. Its announced successor, gemini-3.6-flash, also shuts down on 2026-11-19."
+      "note": "Shut down on both the Gemini API and Vertex AI. For gemini-2.0-flash-lite the Gemini API recommends gemini-3.1-flash-lite, and Vertex AI recommends gemini-3.5-flash-lite for both."
     },
     {
       "slug": "gemini-3-1-flash-lite-to-gemini-3-5-flash-lite",
