@@ -1,5 +1,5 @@
 name: 'Swapvera: deprecated AI model scanner'
-description: 'Finds OpenAI, Anthropic and Gemini model IDs in your code that are retired or scheduled for shutdown.'
+description: 'Finds retired and deprecated OpenAI, Anthropic and Gemini LLM models in your code, with shutdown dates and replacements.'
 author: 'Swapvera'
 branding:
   icon: 'alert-triangle'
